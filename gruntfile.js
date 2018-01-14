@@ -9,6 +9,11 @@ module.exports = function (grunt) {
             }
         }
         , uglify: {
+            options: {
+              mangle: {
+                reserved: ['PGI']
+              }
+            },
             js: {//target
                 src: ['./dist/pg-interval.js'],
                 dest: './dist/pg-interval.min.js'

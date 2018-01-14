@@ -157,7 +157,7 @@ var pgi = function (_interval) {
 
     this.subtract = function subtract(interval) {
       if(interval.constructor.name !== 'PGI'){
-        throwError('subtract - first arg should be instance of PGInterval');
+        throwError('subtract - first arg should be instance of PGI');
       }
 
       __values.ms -= interval.getValue();
@@ -170,7 +170,7 @@ var pgi = function (_interval) {
 
     this.add = function subtract(interval) {
       if(interval.constructor.name !== 'PGI'){
-        throwError('add - first arg should be instance of PGInterval');
+        throwError('add - first arg should be instance of PGI');
       }
 
       __values.ms += interval.getValue();
@@ -183,7 +183,7 @@ var pgi = function (_interval) {
 
     this.diff = function diff (interval) {
       if(interval.constructor.name !== 'PGI'){
-        throwError('diff - first arg should be instance of PGInterval');
+        throwError('diff - first arg should be instance of PGI');
       }
 
       var pgi = new PGI(this.format());
@@ -222,4 +222,5 @@ var pgi = function (_interval) {
   }
 
   return new PGI (_interval);
+
 };

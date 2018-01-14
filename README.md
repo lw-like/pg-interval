@@ -1,6 +1,14 @@
 # pg-interval
 JavaScript postgres interval tools
 
+## Instalation
+
+```
+npm install pg-interval
+```
+
+## Usage
+
 ### Create new pg-interval `pgi` object
 
 ```

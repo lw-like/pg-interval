@@ -1,0 +1,19 @@
+{
+  "name": "pg-interval",
+  "version": "1.0.0",
+  "description": "JavaScript postgres interval tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lw-like/pg-interval.git"
+  },
+  "author": "Łukasz Wróbel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lw-like/pg-interval/issues"
+  },
+  "homepage": "https://github.com/lw-like/pg-interval#readme"
+}

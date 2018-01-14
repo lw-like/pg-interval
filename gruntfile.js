@@ -5,13 +5,13 @@ module.exports = function (grunt) {
         , concat: {
             js: {//target
                 src: ['./src/*.js'],
-                dest: './dist/ng-interval.js'
+                dest: './dist/pg-interval.js'
             }
         }
         , uglify: {
             js: {//target
-                src: ['./dist/ng-interval.js'],
-                dest: './dist/ng-interval.min.js'
+                src: ['./dist/pg-interval.js'],
+                dest: './dist/pg-interval.min.js'
             }
         }
         , watch: {

@@ -30,10 +30,9 @@ var pgi = function (_interval) {
       __values.negative = /^(-).*/.test(interval);
 
       if(__values.negative)
-        interval.replace('-');
+        interval = interval.replace('-', '');
 
       var splited = interval.split(':');
-
 
       switch(splited.length){
         case 1:
@@ -205,8 +204,13 @@ var pgi = function (_interval) {
         return pgi.multiply(factor);
       }
 
-      __values.ms = Math.floor(__values.ms * factor);
-      __values.negative = __values.ms < 0;
+      var ms = __values.negative ? -1 * __values.ms : __values.ms;
+
+      ms = Math.floor(ms * factor);
+
+      __values.negative = ms < 0;
+
+      __values.ms = Math.abs(ms);
 
       pgi.parseFromMS();
 

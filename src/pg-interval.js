@@ -145,7 +145,7 @@ var pgi = function (_interval) {
       return Math.abs(value);
     }
 
-    this.parseFromValue = function () {
+    this.parseFromMS = function () {
       var h = this.calcHours(__values.ms);
       var m = this.calcMinutes(__values.ms);
       var s = this.calcSeconds(__values.ms);
@@ -163,7 +163,7 @@ var pgi = function (_interval) {
       __values.ms -= interval.getValue();
       __values.negative = __values.ms < 0;
 
-      this.parseFromValue();
+      this.parseFromMS();
 
       return this;
     }
@@ -176,7 +176,7 @@ var pgi = function (_interval) {
       __values.ms += interval.getValue();
       __values.negative = __values.ms < 0;
 
-      this.parseFromValue();
+      this.parseFromMS();
 
       return this;
     }
@@ -193,14 +193,38 @@ var pgi = function (_interval) {
       return pgi;
     }
 
+    this.multiply = function (factor, createNewInstance) {
+      if(isNaN(factor)){
+        throwError('multiply - first arg should be number');
+      }
+
+      var pgi = this;
+
+      if(createNewInstance){
+        pgi = new PGI(pgi.format());
+        return pgi.multiply(factor);
+      }
+
+      __values.ms = Math.floor(__values.ms * factor);
+      __values.negative = __values.ms < 0;
+
+      pgi.parseFromMS();
+
+      return pgi;
+    }
+
     this.half = function () {
-      __values.ms = this.getValue() / 2;
+      __values.ms = Math.floor(this.getValue() / 2);
 
       __values.negative = __values.ms < 0;
 
-      this.parseFromValue();
+      this.parseFromMS();
 
       return this;
+    }
+
+    this.isPGInterval = function(interval) {
+      return interval.constructor.name !== 'PGI';
     }
 
     function throwError(){

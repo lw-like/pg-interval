@@ -18,7 +18,7 @@ pgi('00:01:00');
 ### Format interval
 
 ```
-pgi('00:01:00').format('hh hours mm minutes 00 seconds');
+pgi('00:01:00').format('hh hours mm minutes ss seconds');
 ```
 
 Returns `"00 hours 01 minutes 00 seconds"`
@@ -70,7 +70,7 @@ Returns `"00:20:00"`
 If you need new instance of pgi object, you can create it by your self or by passing second argument to multiply method.
 
 ```
-var p1 = pgi('00:10:00').multiply(2);
+var p1 = pgi('00:10:00');
 var p2 = p1.multiply(2, true);
 ```
 
@@ -98,7 +98,7 @@ var interval2 = pgi('10:20:00');
 
 var pDiff = interval2.diff(interval1);
 ```
-`pDiff' will be new pgi instance.
+`pDiff` will be new pgi instance.
 
 
 ```

@@ -155,8 +155,12 @@ var pgi = function (_interval) {
     }
 
     this.subtract = function subtract(interval) {
-      if(interval.constructor.name !== 'PGI'){
-        throwError('subtract - first arg should be instance of PGI');
+      if (typeof interval === 'string' && this.isValidIntervalString(interval)){
+        interval = new PGI(interval);
+      }
+
+      if(!this.isPGInterval(interval)){
+        throwError('subtract - first arg should be instance of PGI or valid interval string');
       }
 
       var ms = this.getValue() - interval.getValue();
@@ -170,8 +174,12 @@ var pgi = function (_interval) {
     }
 
     this.add = function subtract(interval) {
-      if(interval.constructor.name !== 'PGI'){
-        throwError('add - first arg should be instance of PGI');
+      if (typeof interval === 'string' && this.isValidIntervalString(interval)){
+        interval = new PGI(interval);
+      }
+
+      if(!this.isPGInterval(interval)){
+        throwError('add - first arg should be instance of PGI or valid interval string');
       }
 
       var ms = this.getValue() + interval.getValue();
@@ -185,8 +193,12 @@ var pgi = function (_interval) {
     }
 
     this.diff = function diff (interval) {
-      if(interval.constructor.name !== 'PGI'){
-        throwError('diff - first arg should be instance of PGI');
+      if (typeof interval === 'string' && this.isValidIntervalString(interval)){
+        interval = new PGI(interval);
+      }
+
+      if(!this.isPGInterval(interval)){
+        throwError('diff - first arg should be instance of PGI or valid interval string');
       }
 
       var pgi = new PGI(this.format());
@@ -232,7 +244,7 @@ var pgi = function (_interval) {
     }
 
     this.isPGInterval = function(interval) {
-      return interval.constructor.name !== 'PGI';
+      return interval.constructor.name === 'PGI';
     }
 
     this.isValidIntervalString = function(interval) {

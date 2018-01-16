@@ -248,7 +248,7 @@ var pgi = function (_interval) {
     }
 
     this.isValidIntervalString = function(interval) {
-      return /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(interval);
+      return /^(-)?[0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(interval);
     }
 
     function throwError(){

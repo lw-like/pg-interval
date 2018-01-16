@@ -67,7 +67,7 @@ var pgi = function (_interval) {
     }
 
     this.getValue = function () {
-      return __values.ms;
+      return __values.negative ? -1 * __values.ms : __values.ms;
     }
 
     function __formatIntervalSegment(format, whatToFormat) {
@@ -159,8 +159,10 @@ var pgi = function (_interval) {
         throwError('subtract - first arg should be instance of PGI');
       }
 
-      __values.ms -= interval.getValue();
-      __values.negative = __values.ms < 0;
+      var ms = this.getValue() - interval.getValue();
+
+      __values.ms = Math.abs(ms);
+      __values.negative = ms < 0;
 
       this.parseFromMS();
 
@@ -172,8 +174,10 @@ var pgi = function (_interval) {
         throwError('add - first arg should be instance of PGI');
       }
 
-      __values.ms += interval.getValue();
-      __values.negative = __values.ms < 0;
+      var ms = this.getValue() + interval.getValue();
+
+      __values.ms = Math.abs(ms);
+      __values.negative = ms < 0;
 
       this.parseFromMS();
 
@@ -204,7 +208,7 @@ var pgi = function (_interval) {
         return pgi.multiply(factor);
       }
 
-      var ms = __values.negative ? -1 * __values.ms : __values.ms;
+      var ms = this.getValue();
 
       ms = Math.floor(ms * factor);
 
@@ -229,6 +233,10 @@ var pgi = function (_interval) {
 
     this.isPGInterval = function(interval) {
       return interval.constructor.name !== 'PGI';
+    }
+
+    this.isValidIntervalString = function(interval) {
+      return /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(interval);
     }
 
     function throwError(){

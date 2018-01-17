@@ -15,7 +15,7 @@ var pgi = function (_interval) {
       ms: 0
     }
 
-    this.version = '1.0.3';
+    this.version = '1.0.4';
 
     this.updateValue = function updateValue () {
       __values.ms += this.getHours()   * 60 * 60 * 1000;

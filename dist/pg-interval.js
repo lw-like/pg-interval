@@ -1,12 +1,12 @@
 var pgi = function (_interval) {
+  var __FORMAT = {
+    hours : 'hh',
+    minutes: 'mm',
+    seconds : 'ss',
+  }
+
     // return new PGInterval(_interval);
   function PGI (interval) {
-    var __FORMAT = {
-      hours : 'hh',
-      minutes: 'mm',
-      seconds : 'ss',
-    }
-
     var __values = {
       hours : '00',
       minutes : '00',
@@ -89,59 +89,6 @@ var pgi = function (_interval) {
       format = __formatIntervalSegment(format, 'seconds');
 
       return sign + format;
-    }
-
-    this.calcHours = function (value) {
-      var y = 1000 * 60 * 60;
-      var modulo = Math.abs(value) % y;
-
-      value += value > 0 ? -modulo : modulo;
-      value = value / y;
-
-      if(value === 0)
-        return 0;
-
-      return Math.abs(value);
-    }
-
-    this.calcMinutes = function (value) {
-      var y = 1000 * 60;
-      var h = this.calcHours(value) * y * 60;
-      var modulo;
-
-      value -= value < 0 ? -h : h;
-
-      modulo = Math.abs(value) % y;
-
-      value += value > 0 ? -modulo : modulo;
-      value = value / y;
-
-      if(value === 0)
-        return 0;
-
-      return Math.abs(value);
-    }
-
-    this.calcSeconds = function (value) {
-      var y = 1000;
-      var h = this.calcHours(value) * y * 60 * 60;
-      var m;
-      var modulo;
-
-      value -= value < 0 ? -h : h;
-
-      m = this.calcMinutes(value) * y * 60;
-      value -= value < 0 ? -m : m;
-
-      modulo = Math.abs(value) % y;
-      value += value > 0 ? -modulo : modulo;
-
-      value = value / y;
-
-      if(value === 0)
-        return 0;
-
-      return Math.abs(value);
     }
 
     this.parseFromMS = function () {
@@ -243,34 +190,88 @@ var pgi = function (_interval) {
       return this;
     }
 
-    this.isPGInterval = function(interval) {
-      return interval.constructor.name === 'PGI';
-    }
-
-    this.isValidIntervalString = function(interval) {
-      return /^(-)?[0-9]{2}:[0-9]{2}:[0-5][0-9]$/.test(interval);
-    }
-
-    function throwError(){
-      var args = Array.prototype.slice.call(arguments);
-
-      throw new Error("PGI::" + args.join(' '));
-    }
-
-    function __parseSingleValue(value){
-        var i = Math.abs(value).toString();
-
-        i = i.length === 1 ? '0' + i : i;
-
-        return i;
-    }
-
     // Init
     this.parse(interval);
   }
+
+  function throwError(){
+    var args = Array.prototype.slice.call(arguments);
+
+    throw new Error("PGI::" + args.join(' '));
+  }
+
+  function __parseSingleValue(value){
+      var i = Math.abs(value).toString();
+
+      i = i.length === 1 ? '0' + i : i;
+
+      return i;
+  }
+
+  PGI.prototype.isPGInterval = function(interval) {
+    return interval.constructor.name === 'PGI';
+  }
+
+  PGI.prototype.isValidIntervalString = function(interval) {
+    return /^(-)?([0-9]{2}):([0-5][0-9]):([0-5][0-9])$/.test(interval);
+  }
+
+  PGI.prototype.calcHours = function (value) {
+    var y = 1000 * 60 * 60;
+    var modulo = Math.abs(value) % y;
+
+    value += value > 0 ? -modulo : modulo;
+    value = value / y;
+
+    if(value === 0)
+      return 0;
+
+    return Math.abs(value);
+  }
+
+  PGI.prototype.calcMinutes = function (value) {
+    var y = 1000 * 60;
+    var h = this.calcHours(value) * y * 60;
+    var modulo;
+
+    value -= value < 0 ? -h : h;
+
+    modulo = Math.abs(value) % y;
+
+    value += value > 0 ? -modulo : modulo;
+    value = value / y;
+
+    if(value === 0)
+      return 0;
+
+    return Math.abs(value);
+  }
+
+  PGI.prototype.calcSeconds = function (value) {
+    var y = 1000;
+    var h = this.calcHours(value) * y * 60 * 60;
+    var m;
+    var modulo;
+
+    value -= value < 0 ? -h : h;
+
+    m = this.calcMinutes(value) * y * 60;
+    value -= value < 0 ? -m : m;
+
+    modulo = Math.abs(value) % y;
+    value += value > 0 ? -modulo : modulo;
+
+    value = value / y;
+
+    if(value === 0)
+      return 0;
+
+    return Math.abs(value);
+  }
+
 
   return new PGI (_interval);
 
 };
 
-module.exports = pgi;
+typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = pgi : null;

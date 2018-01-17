@@ -15,7 +15,7 @@ var pgi = function (_interval) {
       ms: 0
     }
 
-    this.version = '1.0.0';
+    this.version = '1.0.3';
 
     this.updateValue = function updateValue () {
       __values.ms += this.getHours()   * 60 * 60 * 1000;
@@ -248,7 +248,7 @@ var pgi = function (_interval) {
     }
 
     this.isValidIntervalString = function(interval) {
-      return /^(-)?[0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(interval);
+      return /^(-)?([0-9]{2}):([0-5][0-9]):([0-5][0-9])$/.test(interval);
     }
 
     function throwError(){
@@ -272,3 +272,5 @@ var pgi = function (_interval) {
   return new PGI (_interval);
 
 };
+
+module.exports = pgi;

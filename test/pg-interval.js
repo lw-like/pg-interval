@@ -2,7 +2,7 @@ const pgi = require('../dist/pg-interval.js')
 const chai = require('chai');
 const expect = chai.expect;
 
-var currentVersion = '1.0.4';
+var currentVersion = '1.0.5';
 
 console.log(pgi);
 describe('pg-interval', () => {
@@ -100,6 +100,10 @@ describe('pg-interval', () => {
   describe('Interval string validation', () => {
     it('00:00:01 to be valid interval string', () => {
       expect(pgi().isValidIntervalString('00:00:01')).to.equal(true);
+    })
+
+    it('158:00:00 to be valid interval string', () => {
+      expect(pgi().isValidIntervalString('158:00:00')).to.equal(true);
     })
 
     it('-00:00:01 to be valid interval string', () => {

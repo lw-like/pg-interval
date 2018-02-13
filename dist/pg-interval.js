@@ -213,7 +213,7 @@ var pgi = function (_interval) {
   }
 
   PGI.prototype.isValidIntervalString = function(interval) {
-    return /^(-)?([0-9]{2}):([0-5][0-9]):([0-5][0-9])$/.test(interval);
+    return /^(-)?([0-9]+):([0-5][0-9]):([0-5][0-9])$/.test(interval);
   }
 
   PGI.prototype.calcHours = function (value) {

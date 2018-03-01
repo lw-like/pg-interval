@@ -9,6 +9,12 @@ npm install pg-interval
 
 ## Usage
 
+### node.js
+```
+const pgi = require('pg-interval');
+```
+
+
 ### Create new pg-interval `pgi` object
 
 ```

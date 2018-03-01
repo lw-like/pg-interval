@@ -1,6 +1,6 @@
 {
   "name": "pg-interval",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "JavaScript postgres interval tools",
   "main": "dist/pg-interval.min.js",
   "scripts": {

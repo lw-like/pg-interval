@@ -2,7 +2,7 @@ const pgi = require('../dist/pg-interval.js')
 const chai = require('chai');
 const expect = chai.expect;
 
-var currentVersion = '1.0.7';
+var currentVersion = '1.0.8';
 
 console.log(pgi);
 describe('pg-interval', () => {

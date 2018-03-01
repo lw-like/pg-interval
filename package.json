@@ -6,6 +6,13 @@
   "scripts": {
     "test": "mocha"
   },
+  "keywords": [
+    "pg",
+    "postgres",
+    "interval",
+    "parser",
+    "interval tools"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lw-like/pg-interval.git"

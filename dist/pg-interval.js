@@ -70,6 +70,13 @@ var pgi = function (_interval) {
       return __values.negative ? -1 * __values.ms : __values.ms;
     }
 
+    this.setValue = function (value) {
+      __values.ms = value;
+      __values.negative = __values.ms < 0 ? true : false;
+
+      this.parseFromMS();
+    }
+
     function __formatIntervalSegment(format, whatToFormat) {
       var i = format.indexOf(__FORMAT[whatToFormat]);
 
